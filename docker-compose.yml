@@ -51,6 +51,20 @@ services:
                 - '${DB_USERNAME}'
             retries: 3
             timeout: 5s
+    external_db:
+        image: 'mariadb:11'
+        ports:
+            - "3306:3306"
+        environment:
+            MARIADB_DATABASE: 'external'
+            MARIADB_USER: 'user'
+            MARIADB_PASSWORD: 'secret'
+            MARIADB_ROOT_PASSWORD: 'secret'
+        volumes:
+            - 'sail-external:/var/lib/mysql'
+            - './docker/db/external:/docker-entrypoint-initdb.d'
+        networks:
+            - sail
     redis:
         image: 'redis:alpine'
         ports:
@@ -98,6 +112,8 @@ networks:
     sail:
         driver: bridge
 volumes:
+    sail-external:
+        driver: local
     sail-pgsql:
         driver: local
     sail-redis:
