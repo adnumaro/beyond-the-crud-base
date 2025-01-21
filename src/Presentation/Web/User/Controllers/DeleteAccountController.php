@@ -13,7 +13,7 @@ use Inertia\Inertia;
 use Laravel\Fortify\Actions\ConfirmPassword;
 use Symfony\Component\HttpFoundation\Response;
 
-class DeleteCurrentUserController extends Controller
+class DeleteAccountController extends Controller
 {
     public function __invoke(
         Request $request,

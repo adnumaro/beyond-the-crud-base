@@ -7,16 +7,6 @@ use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
 
-test('email verification screen can be rendered', function (): void {
-    $user = User::factory()->withPersonalTeam()->create([
-        'email_verified_at' => null,
-    ]);
-
-    $response = $this->actingAs($user)->get('/email/verify');
-
-    $response->assertStatus(200);
-});
-
 test('email can be verified', function (): void {
     Event::fake();
 

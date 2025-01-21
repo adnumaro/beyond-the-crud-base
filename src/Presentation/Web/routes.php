@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
 use Presentation\Web\Dashboard\Controllers\ShowDashboardController;
-use Presentation\Web\User\Controllers\DeleteCurrentUserController;
+use Presentation\Web\User\Controllers\DeleteAccountController;
 use Presentation\Web\User\Controllers\DeleteOtherBrowserSessionsController;
 use Presentation\Web\User\Controllers\DeleteProfilePhotoController;
 use Presentation\Web\User\Controllers\ShowUserProfileController;
@@ -41,7 +41,7 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
         Route::delete('/user/profile-photo', DeleteProfilePhotoController::class)
             ->name('current-user-photo.destroy');
 
-        Route::delete('/user', DeleteCurrentUserController::class)
+        Route::delete('/user', DeleteAccountController::class)
             ->name('current-user.destroy');
     });
 });
