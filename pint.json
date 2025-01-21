@@ -1,0 +1,22 @@
+{
+    "preset": "laravel",
+    "rules": {
+        "psr_autoloading": true,
+        "self_accessor": true,
+        "fully_qualified_strict_types": true,
+        "trailing_comma_in_multiline": {
+            "elements": [
+                "arrays",
+                "arguments",
+                "parameters",
+                "match"
+            ]
+        },
+        "multiline_whitespace_before_semicolons": true,
+        "no_spaces_inside_parenthesis": true,
+        "no_trailing_comma_in_singleline_array": true,
+        "no_trailing_comma_in_singleline_function_call": true,
+        "no_php4_constructor": true,
+        "yoda_style": true
+    }
+}
