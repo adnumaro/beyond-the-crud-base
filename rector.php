@@ -20,15 +20,14 @@ use RectorLaravel\Rector\StaticCall\MinutesToSecondsInCacheRector;
 use RectorLaravel\Set\LaravelLevelSetList;
 use RectorLaravel\Set\LaravelSetList;
 
-return RectorConfig
-    ::configure()
+return RectorConfig::configure()
     ->withRootFiles()
     ->withPaths([
-        __DIR__ . '/config',
-        __DIR__ . '/database',
-        __DIR__ . '/resources',
-        __DIR__ . '/app',
-        __DIR__ . '/tests',
+        __DIR__.'/config',
+        __DIR__.'/database',
+        __DIR__.'/resources',
+        __DIR__.'/src',
+        __DIR__.'/tests',
     ])
     ->withSkip([
         MinutesToSecondsInCacheRector::class,
@@ -44,7 +43,7 @@ return RectorConfig
         SeparateMultiUseImportsRector::class,
         AssertEqualsToSameRector::class,
         DeclareStrictTypesRector::class => [
-            __DIR__ . '/resources/*/*.blade.php',
+            __DIR__.'/resources/*/*.blade.php',
         ],
     ])
     ->withSets([

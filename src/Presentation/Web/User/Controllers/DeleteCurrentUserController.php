@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Presentation\Web\User\Controllers;
 
 use Domain\User\Actions\DeleteUser;

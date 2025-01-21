@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Facades\Route;
 use Presentation\Web\Dashboard\Controllers\ShowDashboardController;
 use Presentation\Web\User\Controllers\DeleteCurrentUserController;
@@ -15,11 +17,11 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-])->group(function () {
+])->group(function (): void {
     Route::get('/dashboard', ShowDashboardController::class)->name('dashboard');
 });
 
-Route::group(['middleware' => config('jetstream.middleware', ['web'])], function () {
+Route::group(['middleware' => config('jetstream.middleware', ['web'])], function (): void {
     $authMiddleware = config('jetstream.guard')
         ? 'auth:'.config('jetstream.guard')
         : 'auth';
@@ -28,7 +30,7 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
         ? config('jetstream.auth_session')
         : null;
 
-    Route::group(['middleware' => array_values(array_filter([$authMiddleware, $authSessionMiddleware]))], function () {
+    Route::group(['middleware' => array_values(array_filter([$authMiddleware, $authSessionMiddleware]))], function (): void {
         // User & Profile...
         Route::get('/user/profile', ShowUserProfileController::class)
             ->name('profile.show');

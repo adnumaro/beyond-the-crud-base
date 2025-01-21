@@ -6,13 +6,13 @@ use Illuminate\Foundation\Configuration\Middleware;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
-        web: __DIR__ . '/../src/Presentation/Web/routes.php',
-        api: __DIR__ . '/../src/Presentation/Api/routes.php',
+        web: __DIR__.'/../src/Presentation/Web/routes.php',
+        api: __DIR__.'/../src/Presentation/Api/routes.php',
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->web(append: [
-            \Presentation\Middleware\HandleInertiaRequests::class,
+            Presentation\Middleware\HandleInertiaRequests::class,
             Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ]);
 
