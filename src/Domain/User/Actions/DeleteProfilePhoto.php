@@ -6,12 +6,10 @@ namespace Domain\User\Actions;
 
 use Domain\User\Models\User;
 
-class DeleteUser
+class DeleteProfilePhoto
 {
     public function __invoke(User $user): void
     {
         $user->deleteProfilePhoto();
-        $user->tokens->each->delete();
-        $user->delete();
     }
 }

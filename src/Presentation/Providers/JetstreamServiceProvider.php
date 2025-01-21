@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Presentation\Providers;
 
-use Domain\User\Actions\DeleteUser;
+use Domain\User\Models\User;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Jetstream\Jetstream;
@@ -26,7 +26,8 @@ class JetstreamServiceProvider extends ServiceProvider
     {
         $this->configurePermissions();
 
-        Jetstream::deleteUsersUsing(DeleteUser::class);
+        Jetstream::useUserModel(User::class)
+            ->ignoreRoutes();
 
         Vite::prefetch(concurrency: 3);
     }
