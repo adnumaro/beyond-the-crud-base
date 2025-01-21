@@ -31,8 +31,6 @@ pest()->extend(TestCase::class)
 |
 */
 
-expect()->extend('toBeOne', fn() => $this->toBe(1));
-
 /*
 |--------------------------------------------------------------------------
 | Functions
@@ -43,8 +41,3 @@ expect()->extend('toBeOne', fn() => $this->toBe(1));
 | global functions to help you to reduce the number of lines of code in your test files.
 |
 */
-
-function something(): void
-{
-    // ..
-}
