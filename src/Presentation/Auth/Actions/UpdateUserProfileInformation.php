@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Actions\Fortify;
+namespace Presentation\Auth\Actions;
 
-use App\Models\User;
+use Domain\User\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;

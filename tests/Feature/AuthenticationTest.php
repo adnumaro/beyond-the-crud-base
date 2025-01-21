@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Models\User;
+use Domain\User\Models\User;
 
 test('login screen can be rendered', function (): void {
     $response = $this->get('/login');

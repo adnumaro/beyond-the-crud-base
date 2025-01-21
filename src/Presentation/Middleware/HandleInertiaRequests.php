@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Middleware;
+namespace Presentation\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;

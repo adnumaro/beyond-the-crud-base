@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Actions\Fortify;
+namespace Presentation\Auth\Actions;
 
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Validation\Rules\Password;

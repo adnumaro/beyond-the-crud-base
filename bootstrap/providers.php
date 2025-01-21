@@ -1,7 +1,7 @@
 <?php
 
 return [
-    App\Providers\AppServiceProvider::class,
-    App\Providers\FortifyServiceProvider::class,
-    App\Providers\JetstreamServiceProvider::class,
+    \Presentation\Providers\AppServiceProvider::class,
+    \Presentation\Providers\FortifyServiceProvider::class,
+    \Presentation\Providers\JetstreamServiceProvider::class,
 ];

@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\Providers;
+namespace Presentation\Providers;
 
-use App\Actions\Fortify\CreateNewUser;
-use App\Actions\Fortify\ResetUserPassword;
-use App\Actions\Fortify\UpdateUserPassword;
-use App\Actions\Fortify\UpdateUserProfileInformation;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
+use Presentation\Auth\Actions\CreateNewUser;
+use Presentation\Auth\Actions\ResetUserPassword;
+use Presentation\Auth\Actions\UpdateUserPassword;
+use Presentation\Auth\Actions\UpdateUserProfileInformation;
 
 class FortifyServiceProvider extends ServiceProvider
 {

@@ -2,20 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Database\Factories;
+namespace Database\Factories\Domain\User\Models;
 
 use App\Models\Team;
-use App\Models\User;
+use Domain\User\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
 
-/**
- * @extends Factory<User>
- */
 class UserFactory extends Factory
 {
+    protected $model = User::class;
+
     /**
      * The current password being used by the factory.
      */

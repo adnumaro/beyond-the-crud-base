@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Providers;
+namespace Presentation\Providers;
 
-use App\Actions\Jetstream\DeleteUser;
+use Domain\User\Actions\DeleteUser;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Jetstream\Jetstream;

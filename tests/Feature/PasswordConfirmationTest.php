@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Models\User;
+use Domain\User\Models\User;
 use Laravel\Jetstream\Features;
 
 test('confirm password screen can be rendered', function (): void {

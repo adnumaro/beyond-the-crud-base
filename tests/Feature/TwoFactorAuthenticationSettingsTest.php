@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Models\User;
+use Domain\User\Models\User;
 use Laravel\Fortify\Features;
 
 test('two factor authentication can be enabled', function (): void {

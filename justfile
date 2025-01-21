@@ -10,8 +10,14 @@ composer *args:
 artisan *args:
     just sail artisan {{args}}
 
+npm *args:
+    just sail npm {{args}}
+
 pint *args:
   just docker-compose exec laravel.test vendor/bin/pint {{args}}
+
+pest *args:
+  just docker-compose exec laravel.test vendor/bin/pest {{args}}
 
 rector *args:
   just docker-compose exec laravel.test vendor/bin/rector process {{args}}
