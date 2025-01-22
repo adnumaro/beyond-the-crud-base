@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Route;
 use Presentation\Web\Dashboard\Controllers\ShowDashboardController;
 use Presentation\Web\User\Controllers\DeleteAccountController;
 use Presentation\Web\User\Controllers\DeleteOtherBrowserSessionsController;
-use Presentation\Web\User\Controllers\DeleteProfilePhotoController;
 use Presentation\Web\User\Controllers\ShowUserProfileController;
 use Presentation\Web\Welcome\Controllers\ShowWelcomeController;
 
@@ -37,9 +36,6 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
 
         Route::delete('/user/other-browser-sessions', DeleteOtherBrowserSessionsController::class)
             ->name('other-browser-sessions.destroy');
-
-        Route::delete('/user/profile-photo', DeleteProfilePhotoController::class)
-            ->name('current-user-photo.destroy');
 
         Route::delete('/user', DeleteAccountController::class)
             ->name('current-user.destroy');
