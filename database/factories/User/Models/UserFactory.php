@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Database\Factories\Domain\User\Models;
+namespace Database\Factories\User\Models;
 
 use App\Models\Team;
 use Domain\User\Models\User;
