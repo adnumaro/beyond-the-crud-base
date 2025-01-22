@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Presentation\Web\User\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Carbon;
@@ -19,12 +20,13 @@ class ShowUserProfileController extends Controller
 {
     use ConfirmsTwoFactorAuthentication;
 
-    public function __invoke(Request $request): Response
+    public function __invoke(Request $request): RedirectResponse|Response
     {
         $this->validateTwoFactorAuthenticationState($request);
 
         return Jetstream::inertia()->render($request, 'Profile/Show', [
-            'confirmsTwoFactorAuthentication' => Features::optionEnabled(Features::twoFactorAuthentication(), 'confirm'),
+            'confirmsTwoFactorAuthentication' => Features::optionEnabled(Features::twoFactorAuthentication(),
+                'confirm'),
             'sessions' => $this->sessions($request)->all(),
         ]);
     }
