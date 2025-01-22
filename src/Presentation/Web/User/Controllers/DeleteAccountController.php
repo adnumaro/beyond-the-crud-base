@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Presentation\Web\User\Controllers;
 
-use Domain\User\Actions\DeleteUser;
+use Domain\User\Actions\DeleteUser\DeleteUser;
+use Domain\User\Actions\DeleteUser\DeleteUserInput;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -31,7 +32,7 @@ class DeleteAccountController extends Controller
             ]);
         }
 
-        $deleteUser($request->user()->fresh());
+        $deleteUser(new DeleteUserInput(user: $request->user()->fresh()));
 
         $guard->logout();
 
