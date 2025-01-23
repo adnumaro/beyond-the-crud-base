@@ -5,8 +5,8 @@ import ActionMessage from '@/Components/ActionMessage.vue';
 import FormSection from '@/Components/FormSection.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+import { Button } from '@/Components/ui/button/index.js'
+import { Input } from '@/Components/ui/input/index.js';
 
 const props = defineProps({
     user: Object,
@@ -52,7 +52,7 @@ const sendEmailVerification = () => {
             <!-- Name -->
             <div class="col-span-6 sm:col-span-4">
                 <InputLabel for="name" value="Name" />
-                <TextInput
+                <Input
                     id="name"
                     v-model="form.name"
                     type="text"
@@ -66,7 +66,7 @@ const sendEmailVerification = () => {
             <!-- Email -->
             <div class="col-span-6 sm:col-span-4">
                 <InputLabel for="email" value="Email" />
-                <TextInput
+                <Input
                     id="email"
                     v-model="form.email"
                     type="email"
@@ -103,9 +103,9 @@ const sendEmailVerification = () => {
                 Saved.
             </ActionMessage>
 
-            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <Button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                 Save
-            </PrimaryButton>
+            </Button>
         </template>
     </FormSection>
 </template>
