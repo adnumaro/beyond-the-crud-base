@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Presentation\Web\Dashboard\Controllers;
+namespace Presentation\Web\ExchangeConverter\Controllers;
 
 use Domain\ExchangeRate\Actions\GetExchangeRate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Presentation\Controller;
 
-class ConvertCurrencyController extends Controller
+class ConvertExchangeConverterController extends Controller
 {
     public function __invoke(Request $request, GetExchangeRate $getExchangeRate): RedirectResponse
     {

@@ -25,7 +25,7 @@ test('email can be verified', function (): void {
     Event::assertDispatched(Verified::class);
 
     expect($user->fresh()->hasVerifiedEmail())->toBeTrue();
-    $response->assertRedirect(route('dashboard', absolute: false).'?verified=1');
+    $response->assertRedirect(route('exchange-converter', absolute: false).'?verified=1');
 });
 
 test('email can not verified with invalid hash', function (): void {

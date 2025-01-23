@@ -15,12 +15,15 @@ import {
 } from '@/Components/ui/command/index.js'
 import { Check, ChevronsUpDown } from 'lucide-vue-next'
 import { ref } from 'vue'
+import { useForwardPropsEmits } from 'radix-vue'
+import { cn } from '@/Utils/cn.js'
 
 let props = defineProps({
     currencies: {
         type: Array,
         required: true,
     },
+    class: { type: null, required: false },
 })
 
 const open = ref(false)
@@ -32,15 +35,17 @@ const value = defineModel()
         <PopoverTrigger as-child>
             <Button
                 variant="outline"
-                class="w-[150px] justify-start"
+                :class="cn('flex justify-between', props.class)"
             >
-                {{
-                    value
-                        ? currencies.find((currency) => currency.value === value).label
-                        : 'Select currency...'
-                }}
+                <span class="truncate">
+                    {{
+                        value
+                            ? currencies.find((currency) => currency.value === value).label
+                            : 'Select currency...'
+                    }}
+                    </span>
 
-                <ChevronsUpDown class="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                <ChevronsUpDown class="h-4 w-4 shrink-0 opacity-50" />
             </Button>
         </PopoverTrigger>
         <PopoverContent class="p-0" side="bottom" align="start">

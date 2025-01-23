@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
-use Presentation\Web\Dashboard\Controllers\ConvertCurrencyController;
-use Presentation\Web\Dashboard\Controllers\ShowDashboardController;
+use Presentation\Web\ExchangeConverter\Controllers\ConvertExchangeConverterController;
+use Presentation\Web\ExchangeConverter\Controllers\ShowExchangeConverterController;
 use Presentation\Web\User\Controllers\DeleteAccountController;
 use Presentation\Web\User\Controllers\DeleteOtherBrowserSessionsController;
 use Presentation\Web\User\Controllers\ShowUserProfileController;
@@ -18,8 +18,8 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function (): void {
-    Route::get('/dashboard', ShowDashboardController::class)->name('dashboard');
-    Route::post('/currency/convert', ConvertCurrencyController::class)->name('dashboard.convert-currency');
+    Route::get('/exchange-converter', ShowExchangeConverterController::class)->name('exchange-converter');
+    Route::post('/exchange-converter/convert', ConvertExchangeConverterController::class)->name('exchange-converter.convert');
 
     Route::prefix('user')->group(function (): void {
         Route::get('/profile', ShowUserProfileController::class)
