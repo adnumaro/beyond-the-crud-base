@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Presentation\Providers;
 
 use Carbon\CarbonImmutable;
+use Data\CurrencyExchange\ExchangeRateClient;
+use Data\CurrencyExchange\ExchangeRateRepositoryImpl;
+use Domain\ExchangeRate\Repositories\ExchangeRateRepository;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\ServiceProvider;
@@ -17,7 +20,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        Date::use(CarbonImmutable::class);
+
+        $this->app->bind(
+            ExchangeRateRepository::class,
+            fn () => new ExchangeRateRepositoryImpl(new ExchangeRateClient),
+        );
     }
 
     /**
