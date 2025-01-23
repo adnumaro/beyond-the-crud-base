@@ -5,7 +5,7 @@ import { Input } from '@/Components/ui/input/index.js'
 import { Button } from '@/Components/ui/button/index.js'
 import { computed, ref } from 'vue'
 import { useForm } from '@inertiajs/vue3'
-import { ArrowRightLeft } from 'lucide-vue-next'
+import { ArrowRightLeft, Loader2 } from 'lucide-vue-next'
 
 let props = defineProps({
     currencyCodes: {
@@ -92,7 +92,10 @@ const revertCurrency = () => {
                                 <ArrowRightLeft />
                             </Button>
                         </div>
-                        <Button class="h-full" @click="convert">Convert</Button>
+                        <Button class="h-full text-center" :disabled="form.processing" @click="convert">
+                            <Loader2 v-if="form.processing" class="w-4 h-4 mr-2 animate-spin" />
+                            <span>Convert</span>
+                        </Button>
                     </div>
 
                     <div v-if="ratedAmount" class="mt-6 space-y-2">
