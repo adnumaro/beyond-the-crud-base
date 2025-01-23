@@ -26,9 +26,15 @@ let ratedAmount = ref(null)
 let baseFromRate = ref(null)
 let baseToRate = ref(null)
 
-const convert = () => {
-    //
-}
+const convert = () => form.post(
+    route('dashboard.convert-currency'), {
+        onSuccess: (response) => {
+            ratedAmount.value = response.props.data.ratedAmount;
+            baseFromRate.value = response.props.data.baseFromRate;
+            baseToRate.value = response.props.data.baseToRate;
+        },
+    },
+)
 </script>
 
 <template>

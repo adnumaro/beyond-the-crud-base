@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
+use Presentation\Web\Dashboard\Controllers\ConvertCurrencyController;
 use Presentation\Web\Dashboard\Controllers\ShowDashboardController;
 use Presentation\Web\User\Controllers\DeleteAccountController;
 use Presentation\Web\User\Controllers\DeleteOtherBrowserSessionsController;
@@ -18,26 +19,16 @@ Route::middleware([
     'verified',
 ])->group(function (): void {
     Route::get('/dashboard', ShowDashboardController::class)->name('dashboard');
-});
+    Route::post('/currency/convert', ConvertCurrencyController::class)->name('dashboard.convert-currency');
 
-Route::group(['middleware' => config('jetstream.middleware', ['web'])], function (): void {
-    $authMiddleware = config('jetstream.guard')
-        ? 'auth:'.config('jetstream.guard')
-        : 'auth';
-
-    $authSessionMiddleware = config('jetstream.auth_session', false)
-        ? config('jetstream.auth_session')
-        : null;
-
-    Route::group(['middleware' => array_values(array_filter([$authMiddleware, $authSessionMiddleware]))], function (): void {
-        // User & Profile...
-        Route::get('/user/profile', ShowUserProfileController::class)
+    Route::prefix('user')->group(function (): void {
+        Route::get('/profile', ShowUserProfileController::class)
             ->name('profile.show');
 
-        Route::delete('/user/other-browser-sessions', DeleteOtherBrowserSessionsController::class)
+        Route::delete('/other-browser-sessions', DeleteOtherBrowserSessionsController::class)
             ->name('other-browser-sessions.destroy');
 
-        Route::delete('/user', DeleteAccountController::class)
+        Route::delete('/', DeleteAccountController::class)
             ->name('current-user.destroy');
     });
 });
