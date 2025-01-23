@@ -2,8 +2,14 @@
 
 declare(strict_types=1);
 
-test('exchange converter screen can be rendered', function (): void {
-    $response = $this->get('/exchange-converter');
+use Inertia\Testing\AssertableInertia;
 
-    $response->assertStatus(200);
+test('exchange converter screen can be rendered', function (): void {
+    $this->withoutVite();
+    $this->withoutMiddleware();
+
+    $this->get('/exchange-converter')
+        ->assertInertia(fn(AssertableInertia $page) => $page
+        ->component('ExchangeConverter')
+    );
 });
