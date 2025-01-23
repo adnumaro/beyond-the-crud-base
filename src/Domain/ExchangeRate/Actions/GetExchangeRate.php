@@ -11,8 +11,8 @@ class GetExchangeRate
     {
     }
 
-    public function __invoke(string $from, string $to, float $amount): ExchangeRateResult
+    public function __invoke(string $fromCurrency, string $toCurrency, float $amount): ExchangeRateResult
     {
-        return $this->exchangeRateRepository->getExchangeRate($from, $to, $amount);
+        return $this->exchangeRateRepository->getExchangeRate($fromCurrency, $toCurrency, $amount);
     }
 }

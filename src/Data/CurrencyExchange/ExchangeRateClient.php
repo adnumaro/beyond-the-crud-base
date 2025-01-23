@@ -34,22 +34,22 @@ class ExchangeRateClient
         return collect($currencyCodes);
     }
 
-    public function getExchangeRate(string $from, string $to, float $amount): ExchangeRateResult
+    public function getExchangeRate(string $fromCurrency, string $toCurrency, float $amount): ExchangeRateResult
     {
         $responseFrom = Http
-            ::get(static::BASE_URL . "/currencies/$from.json")
+            ::get(static::BASE_URL . "/currencies/$fromCurrency.json")
             ->json();
 
         $responseTo = Http
-            ::get(static::BASE_URL . "/currencies/$to.json")
+            ::get(static::BASE_URL . "/currencies/$toCurrency.json")
             ->json();
 
-        $exchangeFrom = $responseFrom[$from][$to];
-        $exchangeTo = $responseTo[$to][$from];
+        $exchangeFrom = $responseFrom[$fromCurrency][$toCurrency];
+        $exchangeTo = $responseTo[$toCurrency][$fromCurrency];
 
         return new ExchangeRateResult(
-            baseFrom: new ExchangeRate($from, $exchangeFrom),
-            baseTo: new ExchangeRate($to, $exchangeTo),
+            baseFromCurrency: new ExchangeRate($fromCurrency, $exchangeFrom),
+            baseToCurrency: new ExchangeRate($toCurrency, $exchangeTo),
             amount: $amount,
         );
     }

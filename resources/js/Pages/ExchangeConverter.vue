@@ -15,32 +15,40 @@ let props = defineProps({
 })
 
 const form = useForm({
-    from: 'usd',
-    to: 'eur',
+    fromCurrency: 'usd',
+    toCurrency: 'eur',
     amount: 1.00,
 })
 
-let currencyListFrom = computed(() => props.currencyCodes.filter((currencyCode) => currencyCode.value !== form.to))
-let currencyListTo = computed(() => props.currencyCodes.filter((currencyCode) => currencyCode.value !== form.from))
+let currencyListFromCurrency = computed(
+    () => props.currencyCodes.filter((currencyCode) => currencyCode.value !== form.toCurrency),
+)
+let currencyListToCurrency = computed(
+    () => props.currencyCodes.filter((currencyCode) => currencyCode.value !== form.fromCurrency),
+)
 
 let ratedAmount = ref(null)
-let baseFromRate = ref(null)
-let baseToRate = ref(null)
+let baseFromCurrencyRate = ref(null)
+let baseToCurrencyRate = ref(null)
 
-const convert = () => form.post(
+const convert = () => form.transform((data) => ({
+    from_currency: data.fromCurrency,
+    to_currency: data.toCurrency,
+    amount: data.amount,
+})).post(
     route('exchange-converter.convert'), {
         onSuccess: (response) => {
+            baseFromCurrencyRate.value = response.props.data.baseFromCurrencyRate
+            baseToCurrencyRate.value = response.props.data.baseToCurrencyRate
             ratedAmount.value = response.props.data.ratedAmount
-            baseFromRate.value = response.props.data.baseFromRate
-            baseToRate.value = response.props.data.baseToRate
         },
     },
 )
 
 const revertCurrency = () => {
-    const from = form.from
-    form.from = form.to
-    form.to = from
+    const fromCurrency = form.fromCurrency
+    form.fromCurrency = form.toCurrency
+    form.toCurrency = fromCurrency
 }
 </script>
 
@@ -65,8 +73,16 @@ const revertCurrency = () => {
                             class="h-full w-[150px]"
                         />
                         <div class="relative flex gap-1.5 h-full">
-                            <CurrencyComboBox v-model="form.from" :currencies="currencyListFrom" class="h-full w-[150px]" />
-                            <CurrencyComboBox v-model="form.to" :currencies="currencyListTo" class="h-full w-[150px]" />
+                            <CurrencyComboBox
+                                v-model="form.fromCurrency"
+                                :currencies="currencyListFromCurrency"
+                                class="h-full w-[150px]"
+                            />
+                            <CurrencyComboBox
+                                v-model="form.toCurrency"
+                                :currencies="currencyListToCurrency"
+                                class="h-full w-[150px]"
+                            />
                             <Button
                                 size="icon"
                                 variant="outline"
@@ -80,11 +96,11 @@ const revertCurrency = () => {
                     </div>
 
                     <div v-if="ratedAmount" class="mt-6 space-y-2">
-                        <div class="text-zinc-800 font-medium">{{ form.amount }} {{ form.from.toUpperCase() }} =</div>
-                        <div class="text-3xl font-medium">{{ ratedAmount }} {{ form.to.toUpperCase() }}</div>
+                        <div class="text-zinc-800 font-medium">{{ form.amount }} {{ form.fromCurrency.toUpperCase() }} =</div>
+                        <div class="text-3xl font-medium">{{ ratedAmount }} {{ form.toCurrency.toUpperCase() }}</div>
                         <div class="text-sm text-zinc-600 space-y-1">
-                            <div>1 {{ form.from.toUpperCase() }} = {{ baseFromRate }} {{ form.to.toUpperCase() }}</div>
-                            <div>1 {{ form.to.toUpperCase() }} = {{ baseToRate }} {{ form.from.toUpperCase() }}</div>
+                            <div>1 {{ form.fromCurrency.toUpperCase() }} = {{ baseFromCurrencyRate }} {{ form.toCurrency.toUpperCase() }}</div>
+                            <div>1 {{ form.toCurrency.toUpperCase() }} = {{ baseToCurrencyRate }} {{ form.fromCurrency.toUpperCase() }}</div>
                         </div>
                     </div>
                 </div>

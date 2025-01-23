@@ -13,5 +13,5 @@ interface ExchangeRateRepository
     /** @return Collection<ExchangeRate> */
     public function getCurrencyCodes(): Collection;
 
-    public function getExchangeRate(string $from, string $to, float $amount): ExchangeRateResult;
+    public function getExchangeRate(string $fromCurrency, string $toCurrency, float $amount): ExchangeRateResult;
 }

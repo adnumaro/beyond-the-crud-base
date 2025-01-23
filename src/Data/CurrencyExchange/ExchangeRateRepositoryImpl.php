@@ -20,10 +20,10 @@ class ExchangeRateRepositoryImpl implements ExchangeRateRepository
     }
 
     public function getExchangeRate(
-        string $from,
-        string $to,
+        string $fromCurrency,
+        string $toCurrency,
         float $amount
     ): ExchangeRateResult {
-        return $this->exchangeRateClient->getExchangeRate($from, $to, $amount);
+        return $this->exchangeRateClient->getExchangeRate($fromCurrency, $toCurrency, $amount);
     }
 }

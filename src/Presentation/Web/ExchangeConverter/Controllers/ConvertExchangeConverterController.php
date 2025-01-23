@@ -14,22 +14,22 @@ class ConvertExchangeConverterController extends Controller
     public function __invoke(Request $request, GetExchangeRate $getExchangeRate): RedirectResponse
     {
         $validated = $request->validate([
-            'from' => 'required|string',
-            'to' => 'required|string',
+            'from_currency' => 'required|string',
+            'to_currency' => 'required|string',
             'amount' => 'required|numeric',
         ]);
 
         $rate = $getExchangeRate(
-            from: $validated['from'],
-            to: $validated['to'],
+            fromCurrency: $validated['from_currency'],
+            toCurrency: $validated['to_currency'],
             amount: $validated['amount'],
         );
 
         return back()->with([
             'data' => [
+                'baseFromCurrencyRate' => round($rate->getBaseFromCurrency()->getRate(), 2),
+                'baseToCurrencyRate' => round($rate->getBaseToCurrency()->getRate(), 2),
                 'ratedAmount' => round($rate->getRate(), 2),
-                'baseToRate' => round($rate->getBaseTo()->getRate(), 2),
-                'baseFromRate' => round($rate->getBaseFrom()->getRate(), 2),
             ],
         ]);
     }
